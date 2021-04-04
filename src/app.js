@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const ejs = require('ejs');
-
+const userRoutes = require('./routes/userRoutes')
 
 const app = express();
 
@@ -15,12 +15,14 @@ app.use(cookieParser());
 
 
 //  statics
-app.set('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 //  Views
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use('/', userRoutes);
 
 
 module.exports = app;

@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="/public/css/compiled.css">
 </head>
 <body>
-    <div class="wrapper">
+    <div class="w-full mx-auto text-center">
 <div class="row">
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/login">Login</a>
+            <nav class="main-nav flex align-center justify-center">
+                <a class="px-3 py-1" href="/">Home</a>
+                <a class="px-3 py-1" href="/login">Login</a>
                 <% if (user) { %>
                     <a href="/my-stuff">My Stuff</a>
                     <a href="/logout">Logout</a>

@@ -6,10 +6,9 @@ const router = Router();
 
 
 router.post('/signup', userController.signup_post);
-
 router.post('/login', userController.login_post);
 router.delete('/login', userController.login_delete);
 router.patch('/login', requireAuth, userController.login_patch);
-router.get('/logout', userController.logout_get);
+
 
 module.exports = router;

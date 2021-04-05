@@ -2,9 +2,9 @@ const Book = require('../models/Book');
 
 exports.addNewBook_post = async (req, res) => {
     const owner = req.user.id;
-    const {author, title, price} = req.body;
+    const {author, title, price, ISBN} = req.body;
     try {
-        const book = await Book.create({author, title, price, owner});
+        const book = await Book.create({author, title, price, ISBN, owner});
         res.status(200).json({
             book
         })

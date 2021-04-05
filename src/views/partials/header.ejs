@@ -9,13 +9,13 @@
 </head>
 <body>
     <div class="w-full mx-auto text-center h-screen">
-<div class="row">
+<div class="row bg-green-100">
             <nav class="main-nav flex align-center justify-center">
-                <a class="px-3 py-1 hover:text-blue-500 transition-all duration-250" href="/">Home</a>
-                <a class="px-3 py-1 hover:text-blue-500 transition-all duration-250" href="/login">Login</a>
+                <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/">Home</a>
+                <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/login">Login</a>
                 <% if (user) { %>
-                    <a href="/my-stuff">My Stuff</a>
-                    <a href="/logout">Logout</a>
+                    <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/my-stuff">My Stuff</a>
+                    <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/logout">Logout</a>
                     <% } %>
             </nav>
         </div>
@@ -25,7 +25,8 @@
                 <h1 class="text-3xl">Welcome, <%= user.email %></h1>
                 <% } else { %>
                     <h1 class="p-3 text-5xl">Welcome!</h1>
-                    <h2 class="p-3 text-3xl-mx-auto">Please Sign Up</h2>
+                    <h2 class="p-3 text-3xl-mx-auto"><%= path === '/' ? 'Please Sign Up' : 'Please Login'  %></h2>
+
                     <% } %>
             </header>
         </div>

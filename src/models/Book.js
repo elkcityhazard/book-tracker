@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Book = new mongoose.Schema({
+const bookSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -13,11 +13,11 @@ const Book = new mongoose.Schema({
         lowercase: true
     },
     price: {
-        type: number,
+        type: Number,
         required: true,
     },
     owner: {
-        type: mongoose.Schema.tbpes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     }

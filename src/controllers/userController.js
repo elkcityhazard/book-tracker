@@ -41,13 +41,6 @@ const handleErrors = (err) => {
     return errors;
 }
 
-exports.signup_get = async (req, res) => {
-    res.locals.user = null
-res.render('signup', {
-    pageTitle: 'Sign Up Today'
-})
-}
-
 exports.signup_post = async (req, res) => {
     const { email, password} = req.body;
     try {
@@ -66,9 +59,7 @@ exports.signup_post = async (req, res) => {
     }
 }
 
-exports.login_get = async (req, res) => {
 
-}
 
 exports.login_post = async (req, res) => {
     const { email, password } = req.body;
@@ -105,6 +96,9 @@ exports.login_patch = async (req, res) => {
         // console.log(req.user);
         updates.forEach((update) => req.user[update] = req.body[update]);
         await req.user.save();
+        res.status(200).json({
+            user: req.user
+        })
 
     } catch (err) {
         const errors = handleErrors(err);

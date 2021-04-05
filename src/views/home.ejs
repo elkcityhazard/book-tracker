@@ -1,3 +1,17 @@
 <%- include('partials/header') %>
+<form action="" class="signup h-1/2 w-3/6 mx-auto">
+    <div class="flex align-center justify-center p-2 mx-auto h-12 bg-green-100">
+        <label class="flex-1" for="email">Email: </label>
+        <input class="flex-1" type="text" name="email" id="userEmail">
+    </div>
+    <div class="flex align-center justify-center p-2 mx-auto h-12 bg-green-100">
+        <label class="flex-1" for="password">Password: </label>
+        <input class="flex-1" type="password" name="password" id="userPassword">
+    </div>
+    <div class="flex align-center justify-center p-2 mx-auto h-12 bg-green-100">
+        <button class="p-2 mx-3" type="submit">Submit</button>
+        <button class="p-2 mx-3" type="reset">Reset</button>
+    </div>
+</form>
 
 <%- include('partials/footer') %>

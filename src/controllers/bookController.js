@@ -47,6 +47,7 @@ exports.getAllBooks_get = async (req, res) => {
 }
 
 exports.getSingleBook_get = async (req, res) => {
+    const edit = req.query.edit;
     try {
         const book = await Book.findOne({
             _id: req.params.id,
@@ -58,8 +59,11 @@ exports.getSingleBook_get = async (req, res) => {
                 msg: `Book Could Not Be Located`
             })
         }
-        res.status(200).json({
-            book
+        res.status(200).render('singleBook', {
+            pageTitle: book.title,
+            book: book,
+            edit: edit
+            
         })
 
     } catch (err) {
@@ -73,7 +77,7 @@ exports.updateSingleBook_patch = async (req, res) => {
     try {
         const id = Object.values(req.params);
         const updates = Object.keys(req.body);
-        const allowedUpdates = ['title', 'author', 'price'];
+        const allowedUpdates = ['title', 'author', 'price', 'ISBN'];
         const isValidOperation = updates.every(update => allowedUpdates.includes(update));
 
         if (!isValidOperation) {

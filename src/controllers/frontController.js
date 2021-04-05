@@ -1,3 +1,5 @@
+const Books = require('../models/Book');
+
 exports.homePage_get = async (req, res) => {
     res.render('home', {
         pageTitle: 'Book Log',
@@ -21,6 +23,16 @@ exports.login_get = async (req, res) => {
 exports.logout_get = async (req, res) => {
   res.cookie('jwt', '', {maxAge: 1});
   res.redirect('/')
+
+}
+
+exports.editAllBooks_get = async (req, res) => {
+  const id = req.id;
+  const books = await Books.find({owner: id});
+  res.status(200).render('edit-books', {
+    pageTitle: 'Edit Books',
+    books: books
+  })
 
 }
 

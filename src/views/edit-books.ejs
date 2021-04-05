@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<% if (books) { %>
+    <table class="mx-auto font-bold">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>ISBN</th>
+            <th>Thumbnail</th>
+        </tr>
+        <% for(var i = 0; i < books.length; i++) { %>
+            <tr>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i]._id %></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].title %></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].author %></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].price %></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].ISBN %></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="rounded bg-green-200 px-2 m-2">Edit</a></td>
+            </tr>
+          <% } %>
+    </table>
+
+<% } %>
+
+
+<%- include('partials/footer') %>

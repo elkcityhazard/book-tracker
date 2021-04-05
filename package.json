@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/utils/db.js",
+    "start" : "node src/utils/db.js",
     "compile-css": "postcss -w src/public/css/style.css -o src/public/css/compiled.css"
   },
   "keywords": [],

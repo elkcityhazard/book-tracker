@@ -69,6 +69,8 @@
             <th>Price</th>
             <th>ISBN</th>
             <th>Thumbnail</th>
+            <th>Edit</th>
+            <th>Remove</th>
         </tr>
         <% for(var i = 0; i < books.length; i++) { %>
             <tr>
@@ -79,6 +81,8 @@
             <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].ISBN %></td>
             <td class="p-2 m-2 border-2 border-green-800 capitalize"><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
             <td class="p-2 m-2 border-2 border-green-800 capitalize"><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="rounded bg-green-200 px-2 m-2">Edit</a></td>
+            <td class="p-2 m-2 border-2 border-green-800 capitalize"><button id="<%= books[i]._id %>" class="deleteBook p-3 mx-auto font-bold">&times;</button</td>
+    
             </tr>
           <% } %>
     </table>
@@ -110,6 +114,35 @@
 
 <script>
     const form = document.getElementById('addBook');
+    const deleteBook = document.querySelectorAll('.deleteBook');
+
+    async function removeBook(e) {
+            const id = e.target.getAttribute('id');
+            try {
+                const res = await fetch(`/api/v1/books/${id}`, {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({})
+            })
+            const data = await res.json();
+            console.log(data);
+            if (data.book) {
+                location.assign('/edit-books');
+            } else {
+                console.log(data);
+            }
+    
+            } catch (err) {
+                return console.log(err);
+            }
+        }
+
+    deleteBook.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            removeBook(e);
+        })
+    })
 
     form.addEventListener('submit', async (e) => {
             e.preventDefault();

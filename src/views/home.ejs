@@ -48,7 +48,7 @@
     <h1>Welcome, <%= user.email %></h1>
     <section class="w-4/6 mx-auto bg-white">
         <h2>Your Book Collection</h2>
-        <div id="bookList" class="cardContainer flex align-center justify-center"></div>
+        <div id="bookList" class="cardContainer flex align-center justify-evenly flex-wrap"></div>
 
     </section>
     <script>
@@ -77,9 +77,11 @@
                 card.style.backgroundAttachment = "local scroll";
                 card.style.backgroundSize = "cover";
                 const title = document.createElement('h3');
+                title.className = "text-2xl font-bold"
                 const titleText = document.createTextNode(book.title);
                 title.append(titleText);
                 const author = document.createElement('p');
+                author.className = "text-xl text-gray-300 my-2"
                 const authorText = document.createTextNode(book.author);
                 author.append(authorText);
                 const price = document.createElement('p');

@@ -5,28 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pageTitle %></title>
-    <link rel="stylesheet" href="/public/css/compiled.css">
+    <!-- <link rel="stylesheet" href="/public/css/compiled.css"> -->
+    <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
-    <div class="w-full mx-auto text-center h-screen">
-<div class="row bg-green-100">
-            <nav class="main-nav flex align-center justify-center">
-                <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/">Home</a>
-                <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/login">Login</a>
+    <div class="wrapper">
+        <div class="row">
+            <p>
                 <% if (user) { %>
-                    <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/edit-books">Edit Books</a>
-                    <a class="px-3 py-1 m-3 font-bold rounded shadow-sm hover:text-blue-500 transition-all duration-200 bg-green-500 hover:bg-green-100" href="/logout">Logout</a>
+                    Welcome <%=user.email %>
+                <% } %>
+            </p>
+        </div>
+<div class="row">
+            <nav class="main-nav">
+                <a class="" href="/">Home</a>
+                <% if (!user) { %>
+                    <a class="" href="/login">Login</a>
+             <% } %> 
+                
+                <% if (user) { %>
+                    <a class="" href="/edit-books">Edit Books</a>
+                    <a class="" href="/logout">Logout</a>
                     <% } %>
             </nav>
         </div>
-        <div class="row">
-            <header class="main-header">
-                <% if (user) { %>
-                <h1 class="text-3xl">Welcome, <%= user.email %></h1>
-                <% } else { %>
-                    <h1 class="p-3 text-5xl">Welcome!</h1>
-                    <h2 class="p-3 text-3xl-mx-auto"><%= path === '/' ? 'Please Sign Up' : 'Please Login'  %></h2>
-
-                    <% } %>
-            </header>
-        </div>
+        

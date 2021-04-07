@@ -1,25 +1,25 @@
 <%- include('partials/header') %>
 <% if (books.length == 0) { %>
 <form action="" id="addBook">
-    <div class="form-control block mx-auto my-2">
-        <label class="inline-block w-36 text-left" for="title">Title: </label>
-        <input type="text" class="bg-green-200 text-black" name="title" id="bookTitle" value="" placeholder="Book Title">
+    <div class="form-control">
+        <label class="" for="title">Title: </label>
+        <input type="text" class="" name="title" id="bookTitle" value="" placeholder="Book Title">
     </div>
-    <div class="form-control block mx-auto my-2">
-        <label class="inline-block w-36 text-left" for="author">Author: </label>
-        <input type="text" class="bg-green-200 text-black" name="author" id="bookAuthor" value="" placeholder="Book Author">
+    <div class="form-control">
+        <label class="" for="author">Author: </label>
+        <input type="text" class="" name="author" id="bookAuthor" value="" placeholder="Book Author">
     </div>
-    <div class="form-control block mx-auto my-2">
-    <label class="inline-block w-36 text-left" for="price">Price: </label>
-        <input type="text" class="bg-green-200 text-black" name="price" id="bookPrice" value="" placeholder="Book Price">
+    <div class="form-control">
+    <label class="" for="price">Price: </label>
+        <input type="text" class="" name="price" id="bookPrice" value="" placeholder="Book Price">
     </div>
-    <div class="form-control block mx-auto my-2">
-        <label class="inline-block w-36 text-left" for="ISBN">ISBN: </label>
-        <input type="text" class="bg-green-200 text-black" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
+    <div class="form-control">
+        <label class="" for="ISBN">ISBN: </label>
+        <input type="text" class="" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
     </div>
-    <div class="form-control block mx-auto my-2">
-        <button class="rounded p-3 m-3 border-2 bg-green-200 text-black hover:bg-green-600 hover:text-white transition duration-200" type="submit">Submit</button>
-        <button class="rounded p-3 m-3 border-2 bg-green-200 text-black hover:bg-green-600 hover:text-white transition duration-200" type="reset">Reset</button>
+    <div class="form-control">
+        <button class="" type="submit">Submit</button>
+        <button class="" type="reset">Reset</button>
     </div>
 </form>
 
@@ -74,14 +74,14 @@
         </tr>
         <% for(var i = 0; i < books.length; i++) { %>
             <tr>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i]._id %></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].title %></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].author %></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].price %></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><%= books[i].ISBN %></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="rounded bg-green-200 px-2 m-2">Edit</a></td>
-            <td class="p-2 m-2 border-2 border-green-800 capitalize"><button id="<%= books[i]._id %>" class="deleteBook p-3 mx-auto font-bold">&times;</button</td>
+            <td class=""><%= books[i]._id %></td>
+            <td class=""><%= books[i].title %></td>
+            <td class=""><%= books[i].author %></td>
+            <td class=""><%= books[i].price %></td>
+            <td class=""><%= books[i].ISBN %></td>
+            <td class=""><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
+            <td class=""><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="">Edit</a></td>
+            <td class=""><button id="<%= books[i]._id %>" class="deleteBook ">&times;</button</td>
     
             </tr>
           <% } %>
@@ -90,25 +90,25 @@
     <hr class="mx-auto my-5 p-5">
 <h4 class="text-center mx-auto my-4 text-2xl text-black font-bold">Add New Book</h4>
     <form action="" id="addBook">
-    <div class="form-control block mx-auto my-2">
-        <label class="inline-block w-36 text-left" for="title">Title: </label>
-        <input type="text" class="bg-green-200 text-black" name="title" id="bookTitle" value="" placeholder="Book Title">
+    <div class="form-control">
+        <label class="" for="title">Title: </label>
+        <input type="text" class="" name="title" id="bookTitle" value="" placeholder="Book Title">
     </div>
-    <div class="form-control block mx-auto my-2">
-        <label class="inline-block w-36 text-left" for="author">Author: </label>
-        <input type="text" class="bg-green-200 text-black" name="author" id="bookAuthor" value="" placeholder="Book Author">
+    <div class="form-control">
+        <label class="" for="author">Author: </label>
+        <input type="text" class="" name="author" id="bookAuthor" value="" placeholder="Book Author">
     </div>
-    <div class="form-control block mx-auto my-2">
-    <label class="inline-block w-36 text-left" for="price">Price: </label>
-        <input type="text" class="bg-green-200 text-black" name="price" id="bookPrice" value="" placeholder="Book Price">
+    <div class="form-control">
+    <label class="" for="price">Price: </label>
+        <input type="text" class="" name="price" id="bookPrice" value="" placeholder="Book Price">
     </div>
-    <div class="form-control block mx-auto my-2">
-        <label class="inline-block w-36 text-left" for="ISBN">ISBN: </label>
-        <input type="text" class="bg-green-200 text-black" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
+    <div class="form-control">
+        <label class="" for="ISBN">ISBN: </label>
+        <input type="text" class="" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
     </div>
-    <div class="form-control block mx-auto my-2">
-        <button class="rounded p-3 m-3 border-2 bg-green-200 text-black hover:bg-green-600 hover:text-white transition duration-200" type="submit">Submit</button>
-        <button class="rounded p-3 m-3 border-2 bg-green-200 text-black hover:bg-green-600 hover:text-white transition duration-200" type="reset">Reset</button>
+    <div class="form-control">
+        <button class="" type="submit">Submit</button>
+        <button class="" type="reset">Reset</button>
     </div>
 </form>
 

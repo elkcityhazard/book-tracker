@@ -1,18 +1,18 @@
 <%- include('partials/header') %>
 <% if (!user) {%>
 
-    <form action="" class="signup h-2/6 w-96 mx-auto shadow-lg bg-green-100 flex align-center justify-center flex-col text-bold">
-        <div class="flex align-center justify-center p-2 mx-auto h-12">
-            <label class="flex-auto w-32 px-2" for="email">Email: </label>
-            <input class="flex-auto w-32" type="text" name="email" id="userEmail">
+    <form action="" class="signup">
+        <div class="">
+            <label class="" for="email">Email: </label>
+            <input class="" type="text" name="email" id="userEmail">
         </div>
-        <div class="flex align-center justify-center p-2 mx-auto h-12">
-            <label class="flex-auto w-32  px-2" for="password">Password: </label>
-            <input class="flex-auto w-32" type="password" name="password" id="userPassword">
+        <div class="">
+            <label class="" for="password">Password: </label>
+            <input class="" type="password" name="password" id="userPassword">
         </div>
-        <div class="flex align-center justify-center p-2 mx-auto h-12">
-            <button class="px-4 mx-3 shadow-md hover:bg-green-200 hover:text-black transition-all duration-200 w-3/6 rounded bg-green-500 text-white" type="submit">Submit</button>
-            <button class="px-4 mx-3 shadow-md hover:bg-green-200 hover:text-black transition-all duration-200 w-3/6 rounded bg-green-500 text-white" type="reset">Reset</button>
+        <div class="">
+            <button class="" type="submit">Submit</button>
+            <button class="" type="reset">Reset</button>
         </div>
     </form>
     
@@ -45,7 +45,7 @@
     </script>
 
 <% } else if (user) { %>
-    <section class="mx-auto w-100 bg-white text-black text-bold">
+    <section class="">
         <h1>Welcome, <%= user.email %></h1>
     </section>
     <script>

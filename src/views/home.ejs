@@ -1,107 +1,145 @@
 <%- include('partials/header') %>
-<% if (!user) {%>
+<div class="row">
+    <header class="main-header">
+        <% if (user) { %>
+        <h1 class=""><%= user.email %>'s Book Collection</h1>
+        <% } else { %>
+            <h1 class="">Bookescent</h1>
+            <h2 id="typewriter" class="">All Of Your Books - Secured</h2> <span id="cursor" style="visibility:hidden;"></span>
+            <script>
+                const typewriter = document.getElementById('typewriter');
+                const cursor = document.getElementById('cursor');
+                const textArray = typewriter.textContent.split('');
+                typewriter.textContent = '';
+                let loopTimer;
 
-    <form action="" class="signup h-2/6 w-96 mx-auto shadow-lg bg-green-100 flex align-center justify-center flex-col text-bold">
-        <div class="flex align-center justify-center p-2 mx-auto h-12">
-            <label class="flex-auto w-32 px-2" for="email">Email: </label>
-            <input class="flex-auto w-32" type="text" name="email" id="userEmail">
-        </div>
-        <div class="flex align-center justify-center p-2 mx-auto h-12">
-            <label class="flex-auto w-32  px-2" for="password">Password: </label>
-            <input class="flex-auto w-32" type="password" name="password" id="userPassword">
-        </div>
-        <div class="flex align-center justify-center p-2 mx-auto h-12">
-            <button class="px-4 mx-3 shadow-md hover:bg-green-200 hover:text-black transition-all duration-200 w-3/6 rounded bg-green-500 text-white" type="submit">Submit</button>
-            <button class="px-4 mx-3 shadow-md hover:bg-green-200 hover:text-black transition-all duration-200 w-3/6 rounded bg-green-500 text-white" type="reset">Reset</button>
-        </div>
-    </form>
-    
-    <script>
-        const form = document.querySelector('form');
-    
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = form.email.value;
-            const password = form.password.value;
-            try {
-                const res = await fetch('/api/v1/users/signup', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, password})
-            })
-            const data = await res.json();
-            console.log(data);
-            if (data.user) {
-                location.assign('/');
-            } else {
-                console.log(data);
-            }
-    
-            } catch (err) {
-                return console.log(err);
-            }
-        })
-    
-    </script>
+                setInterval(() => {
+                    if (cursor.style.visibility === "hidden") {
+                        cursor.style.visibility = "visible";
+                    } else {
+                        cursor.style.visibility = "hidden";
+                    }
+                }, 1000)
+                
+                function textLooper() {
+                    if (textArray.length > 0) {
+                        typewriter.textContent += textArray.shift();
+                    } else {
+                        clearTimeout(loopTimer);
+                        return false;
+                    }
+                    loopTimer = setTimeout('textLooper()', 100);
+                }
+                
+                textLooper();
 
-<% } else if (user) { %>
-    <h1>Welcome, <%= user.email %></h1>
-    <section class="w-4/6 mx-auto bg-white">
-        <h2>Your Book Collection</h2>
-        <div id="bookList" class="cardContainer flex align-center justify-evenly flex-wrap"></div>
+                </script>
+            <% } %>
+            <% if (!user) {%>
 
-    </section>
-    <script>
-        const bookList = document.getElementById('bookList');
-
-        const getBooks = async function() {
-            try {
-                const res = await fetch('/api/v1/books', {
-                    method: 'GET',
-                    headers: {'Content-Type' : 'application/json'}
-                })
-                const data = await res.json();
-                return data;
-
-            } catch (err) {
-                return console.log(err);
-            }
-        }
-
-        getBooks().then((data) => {
-            data.forEach((book) => {
-                const card = document.createElement('div');
-                card.className = "mx-auto my-2 p-4 w-64 shadow-2xl bg-green-100 capitalize flex align-center justify-center flex-col font-bold text-white";
-                card.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.66)), url('http://covers.openlibrary.org/b/isbn/${book.ISBN}-L.jpg')`;
-                card.style.height = "475px";
-                card.style.backgroundAttachment = "local scroll";
-                card.style.backgroundSize = "cover";
-                const title = document.createElement('h3');
-                title.className = "text-2xl font-bold"
-                const titleText = document.createTextNode(book.title);
-                title.append(titleText);
-                const author = document.createElement('p');
-                author.className = "text-xl text-gray-300 my-2"
-                const authorText = document.createTextNode(book.author);
-                author.append(authorText);
-                const price = document.createElement('p');
-                const priceText = document.createTextNode(book.price);
-                const link = document.createElement('a');
-                const linkText = document.createTextNode('Click To View');
-                link.className = "p-2 rounded bg-green-100 hover:bg-green-500 transform duration-200 text-black shadow-xl"
-                link.append(linkText);
-                link.setAttribute('href', `/api/v1/books/${book._id}`) 
-                price.append(priceText);
-                card.append(title);
-                card.append(author);
-                card.append(price);
-                card.append(link)
-                bookList.appendChild(card);
-            })
-        });
-
-    </script>
-<% } %>
+                <form action="" class="signup">
+                    <h3>Sign Up</h3>
+                    <div class="form-control">
+                        <label class="" for="email">Email: </label>
+                        <input class="" type="text" name="email" id="userEmail">
+                    </div>
+                    <div class="form-control">
+                        <label class="" for="password">Password: </label>
+                        <input class="" type="password" name="password" id="userPassword">
+                    </div>
+                    <div class="form-control">
+                        <button class="" type="submit">Submit</button>
+                        <button class="" type="reset">Reset</button>
+                    </div>
+                </form>
+                
+                <script>
+                    const form = document.querySelector('form');
+                
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const email = form.email.value;
+                        const password = form.password.value;
+                        try {
+                            const res = await fetch('/api/v1/users/signup', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({email, password})
+                        })
+                        const data = await res.json();
+                        console.log(data);
+                        if (data.user) {
+                            location.assign('/');
+                        } else {
+                            console.log(data);
+                        }
+                
+                        } catch (err) {
+                            return console.log(err);
+                        }
+                    })
+                
+                </script>
+            
+            <% } else if (user) { %>
+                <section class="">
+                    <h2>Your Book Collection</h2>
+                    <div id="bookList" class=""></div>
+            
+                </section>
+                <script>
+                    const bookList = document.getElementById('bookList');
+            
+                    const getBooks = async function() {
+                        try {
+                            const res = await fetch('/api/v1/books', {
+                                method: 'GET',
+                                headers: {'Content-Type' : 'application/json'}
+                            })
+                            const data = await res.json();
+                            return data;
+            
+                        } catch (err) {
+                            return console.log(err);
+                        }
+                    }
+            
+                    getBooks().then((data) => {
+                        data.forEach((book) => {
+                            const card = document.createElement('div');
+                            card.className = "";
+                            card.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.66)), url('http://covers.openlibrary.org/b/isbn/${book.ISBN}-L.jpg')`;
+                            card.style.height = "475px";
+                            card.style.backgroundAttachment = "local scroll";
+                            card.style.backgroundSize = "cover";
+                            const title = document.createElement('h3');
+                            title.className = ""
+                            const titleText = document.createTextNode(book.title);
+                            title.append(titleText);
+                            const author = document.createElement('p');
+                            author.className = ""
+                            const authorText = document.createTextNode(book.author);
+                            author.append(authorText);
+                            const price = document.createElement('p');
+                            const priceText = document.createTextNode(book.price);
+                            const link = document.createElement('a');
+                            const linkText = document.createTextNode('Click To View');
+                            link.className = ""
+                            link.append(linkText);
+                            link.setAttribute('href', `/api/v1/books/${book._id}`) 
+                            price.append(priceText);
+                            card.append(title);
+                            card.append(author);
+                            card.append(price);
+                            card.append(link)
+                            bookList.appendChild(card);
+                        })
+                    });
+            
+                </script>
+            <% } %>
+    </header>
+</div>
 
 
 <%- include('partials/footer') %>

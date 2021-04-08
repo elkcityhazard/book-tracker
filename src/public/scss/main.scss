@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
 
+@keyframes unblur {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 $imperial-primer: rgba(34, 47, 62,1.0);
 $light-blue-ballerina: rgba(200, 214, 229,1.0);
 $pastel-red: rgba(255, 107, 107,1.0);
@@ -202,13 +211,17 @@ body {
             grid-row-end: 4;
             justify-content: space-between;
             .card {
+                animation: unblur 1000ms linear 250ms forwards;
                 align-items: center;
+                border-radius: 4px;
+                box-shadow: 25px 35px 15px -20px rgba(0, 0, 0, 0.33);
                 color: #fff;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 margin: .5rem auto;
                 max-width: 100%;
+                opacity: 0;
                 padding: .5rem;
                 text-transform: capitalize;
                 width: 360px;

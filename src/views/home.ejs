@@ -2,25 +2,21 @@
 <div class="row">
     <header class="main-header">
         <% if (user) { %>
-        <h1 class=""><%= user.email %>'s Book Collection</h1>
+        <h1 class="main-header__user"><%= user.email %>'s Book Collection</h1>
         <% } else { %>
-            <h1 class="">Bookescent</h1>
-            <h2 id="typewriter" class="">All Of Your Books - Secured</h2> <span id="cursor" style="visibility:hidden;"></span>
-            <script>
+            <h1 >Bookescent</h1>
+            <div class="typewriter-container">
+                <h2 id="typewriter" class="">All Of Your Books - Secured<span id="cursor" style="visibility:hidden;"></span></h2>
+            </div>
+            
+            <script async>
                 const typewriter = document.getElementById('typewriter');
                 const cursor = document.getElementById('cursor');
                 const textArray = typewriter.textContent.split('');
                 typewriter.textContent = '';
                 let loopTimer;
 
-                setInterval(() => {
-                    if (cursor.style.visibility === "hidden") {
-                        cursor.style.visibility = "visible";
-                    } else {
-                        cursor.style.visibility = "hidden";
-                    }
-                }, 1000)
-                
+                               
                 function textLooper() {
                     if (textArray.length > 0) {
                         typewriter.textContent += textArray.shift();
@@ -82,9 +78,10 @@
                 </script>
             
             <% } else if (user) { %>
-                <section class="">
+            </header>
+                <section class="section-book">
                     <h2>Your Book Collection</h2>
-                    <div id="bookList" class=""></div>
+                    <div id="bookList" class="section-book__book-list"></div>
             
                 </section>
                 <script>
@@ -107,7 +104,7 @@
                     getBooks().then((data) => {
                         data.forEach((book) => {
                             const card = document.createElement('div');
-                            card.className = "";
+                            card.className = "card";
                             card.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.66)), url('http://covers.openlibrary.org/b/isbn/${book.ISBN}-L.jpg')`;
                             card.style.height = "475px";
                             card.style.backgroundAttachment = "local scroll";
@@ -121,7 +118,7 @@
                             const authorText = document.createTextNode(book.author);
                             author.append(authorText);
                             const price = document.createElement('p');
-                            const priceText = document.createTextNode(book.price);
+                            const priceText = document.createTextNode('$' + book.price);
                             const link = document.createElement('a');
                             const linkText = document.createTextNode('Click To View');
                             link.className = ""

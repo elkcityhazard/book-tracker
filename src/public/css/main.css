@@ -64,6 +64,27 @@ body {
   margin: 0 auto;
   padding: 0 1rem 1rem;
 }
+.wrapper .login {
+  background: #fff;
+  color: #222f3e;
+  display: block;
+}
+.wrapper .login .form-control {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 1rem;
+}
+.wrapper .login .form-control label,
+.wrapper .login .form-control button {
+  flex: 1;
+}
+.wrapper .login .form-control input {
+  flex: 2;
+}
+.wrapper .login .form-control button {
+  margin: 0 1rem;
+}
 .wrapper .row {
   display: block;
   margin: 0 auto;
@@ -71,6 +92,9 @@ body {
 }
 .wrapper .row .main-nav {
   text-align: center;
+}
+.wrapper .row .main-nav span {
+  padding: 0 1rem;
 }
 .wrapper .row .main-header {
   align-items: center;
@@ -80,7 +104,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 100vh;
+  max-height: 100vh;
   justify-content: center;
 }
 .wrapper .row .main-header h1 {
@@ -92,7 +116,13 @@ body {
   grid-row-end: 2;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
-.wrapper .row .main-header h2 {
+.wrapper .row .main-header h1.main-header__user {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+.wrapper .row .main-header .typewriter-container {
   align-self: start;
   color: #fff;
   font-size: 1rem;
@@ -102,11 +132,6 @@ body {
   grid-row-end: 3;
   margin: 0 1rem;
   text-shadow: 2px 2px 2px black;
-}
-.wrapper .row .main-header #cursor {
-  height: 1.5rem;
-  width: 5px;
-  background: #fff;
 }
 .wrapper .row .main-header .signup {
   display: block;
@@ -151,6 +176,114 @@ body {
   outline: 3px dashed #ff6b6b;
 }
 .wrapper .row .main-header .signup .form-control button {
+  border: none;
+  border-radius: 10px;
+  flex: 1;
+  margin: 0 1rem;
+  padding: 0.25rem 0.75rem;
+}
+.wrapper .row .section-book__book-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  justify-content: space-between;
+}
+.wrapper .row .section-book__book-list .card {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.5rem auto;
+  max-width: 100%;
+  padding: 0.5rem;
+  text-transform: capitalize;
+  width: 360px;
+}
+.wrapper .row .section-book__book-list .card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.wrapper .row .section-book__book-list .card h3 + p {
+  color: #e3e3e3;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+}
+.wrapper .row .section-book__book-list .card p + p {
+  color: #fff;
+  margin: 0.5rem auto;
+  font-style: italic;
+  font-weight: 600;
+}
+.wrapper .row .single-book {
+  display: block;
+}
+.wrapper .row .single-book h1, .wrapper .row .single-book h2, .wrapper .row .single-book p {
+  padding: 0.33rem 1rem;
+  text-align: left;
+  text-transform: capitalize;
+}
+.wrapper .row .single-book figure {
+  margin: 0.25rem auto;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+}
+.wrapper .row .single-book figure img {
+  height: auto;
+  max-width: 100%;
+}
+.wrapper .row .section-edit-book h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.wrapper .row .section-edit-book .section-edit-book__form {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1rem;
+}
+.wrapper .row .section-edit-book .section-edit-book__form .form-control {
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  justify-content: center;
+  margin: 0.5rem auto;
+}
+.wrapper .row .section-edit-book .section-edit-book__form .form-control h3 {
+  color: #222f3e;
+}
+.wrapper .row .section-edit-book .section-edit-book__form .form-control label {
+  color: #222f3e;
+  font-weight: 600;
+  flex: 1;
+  text-align: left;
+  text-shadow: 2px 2px 1px rgba(255, 255, 255, 0.25);
+}
+.wrapper .row .section-edit-book .section-edit-book__form .form-control input {
+  background: #c8d6e5;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  flex: 1;
+  font-weight: 700;
+  line-height: 1.64;
+  max-width: 66%;
+  padding: 0.25rem;
+  outline: none;
+  transition: all 250ms linear;
+  -webkit-transition: all 250ms linear;
+}
+.wrapper .row .section-edit-book .section-edit-book__form .form-control input:focus {
+  outline: 3px dashed #ff6b6b;
+}
+.wrapper .row .section-edit-book .section-edit-book__form .form-control button {
   border: none;
   border-radius: 10px;
   flex: 1;

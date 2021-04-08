@@ -10,24 +10,5 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="row">
-            <p>
-                <% if (user) { %>
-                    Welcome <%=user.email %>
-                <% } %>
-            </p>
-        </div>
-<div class="row">
-            <nav class="main-nav">
-                <a class="" href="/">Home</a>
-                <% if (!user) { %>
-                    <a class="" href="/login">Login</a>
-             <% } %> 
-                
-                <% if (user) { %>
-                    <a class="" href="/edit-books">Edit Books</a>
-                    <a class="" href="/logout">Logout</a>
-                    <% } %>
-            </nav>
-        </div>
+<%- include('./navigation.ejs') %>
         

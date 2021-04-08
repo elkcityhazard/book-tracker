@@ -8,39 +8,51 @@
 <%} %>
 
 <% if (user, book) { %>
-<h1 class=""><%= book.title %></h1>
-<h2 class=""><%= book.author %></h2>
-<p class=""><strong>Price: </strong> <%= book.price %></p>
-<p class=""><strong>ISBN #: </strong><%= book.ISBN %></p>
-<figure>
-    <img class="mx-auto my-4" src="http://covers.openlibrary.org/b/isbn/<%= book.ISBN %>-L.jpg" alt="<%= book.title %>">
-</figure>
+    <div class="row">
+        <section class="single-book">
+            <h1 class="">Title: <%= book.title %></h1>
+            <h2 class="">Author: <%= book.author %></h2>
+            <p class=""><strong>Price: </strong> <%= book.price %></p>
+            <p class=""><strong>ISBN #: </strong><%= book.ISBN %></p>
+            <figure>
+                <img class="mx-auto my-4" src="http://covers.openlibrary.org/b/isbn/<%= book.ISBN %>-L.jpg" alt="<%= book.title %>">
+                <figcaption><%= book.title %></figcaption>
+            </figure>
+        </section>
+    </div>
+
+
 <% } %> 
 
 <% if (edit, book) { %>
-    <h3 class="">Edit Book Here</h3>
-<form action="" id="editBook" class="">
-    <div class="">
-        <label class="" for="title">Title: </label>
-        <input type="text" class="" name="title" id="bookTitle" value="<%= book.title %>" placeholder="<%= book.title %>">
+    <div class="row">
+        <section class="section-edit-book">
+            <h3 class="">Edit Book Here</h3>
+            <form action="" id="editBook" class="section-edit-book__form">
+                <div class="form-control">
+                    <label class="" for="title">Title: </label>
+                    <input type="text" class="" name="title" id="bookTitle" value="<%= book.title %>" placeholder="<%= book.title %>">
+                </div>
+                <div class="form-control">
+                    <label class="" for="author">Author: </label>
+                    <input type="text" class="" name="author" id="bookAuthor" value="<%= book.author %>" placeholder="<%= book.author %>">
+                </div>
+                <div class="form-control">
+                <label class="" for="price">Price: </label>
+                    <input type="text" class="" name="price" id="bookPrice" value="<%= book.price %>" placeholder="<%= book.price %>">
+                </div>
+                <div class="form-control">
+                    <label class="" for="ISBN">ISBN: </label>
+                    <input type="text" class="" name="ISBN" id="bookISBN" value="<%= book.ISBN %>" placeholder="<%= book.ISBN %>">
+                </div>
+                <div class="form-control">
+                    <button class=" type="submit">Submit</button>
+                    <button class=" type="reset">Reset</button>
+                </div>
+            </form>
+        </section>
     </div>
-    <div class="">
-        <label class="" for="author">Author: </label>
-        <input type="text" class="" name="author" id="bookAuthor" value="<%= book.author %>" placeholder="<%= book.author %>">
-    </div>
-    <div class="">
-    <label class="" for="price">Price: </label>
-        <input type="text" class="" name="price" id="bookPrice" value="<%= book.price %>" placeholder="<%= book.price %>">
-    </div>
-    <div class="">
-        <label class="" for="ISBN">ISBN: </label>
-        <input type="text" class="" name="ISBN" id="bookISBN" value="<%= book.ISBN %>" placeholder="<%= book.ISBN %>">
-    </div>
-    <div class="">
-        <button class=" type="submit">Submit</button>
-        <button class=" type="reset">Reset</button>
-    </div>
-</form>
+
 <script>
     const form = document.getElementById('editBook');
 

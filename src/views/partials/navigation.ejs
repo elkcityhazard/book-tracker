@@ -1,0 +1,16 @@
+<div class="row">
+    <nav class="main-nav">
+        <% if (user) { %>
+            <span>Welcome <%=user.email %></span>
+        <% } %>
+        <a class="" href="/">Home</a>
+        <% if (!user) { %>
+            <a class="" href="/login">Login</a>
+     <% } %> 
+        
+        <% if (user) { %>
+            <a class="" href="/edit-books">Edit Books</a>
+            <a class="" href="/logout">Logout</a>
+            <% } %>
+    </nav>
+</div>

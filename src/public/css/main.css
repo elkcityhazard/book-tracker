@@ -64,6 +64,19 @@ body {
   scroll-behavior: smooth;
 }
 
+hr {
+  box-shadow: 2px 2px -1px 2px rgba(0, 0, 0, 0.33);
+  margin: 1rem auto;
+  max-width: 968px;
+  width: 100%;
+}
+
+table,
+tr,
+td {
+  text-transform: capitalize;
+}
+
 .wrapper {
   align-items: center;
   display: flex;
@@ -301,6 +314,102 @@ body {
   flex: 1;
   margin: 0 1rem;
   padding: 0.25rem 0.75rem;
+}
+.wrapper .row .book-table {
+  display: block;
+  margin: 0 auto;
+  max-width: 968px;
+  overflow-x: auto;
+  width: 100%;
+}
+.wrapper .row .book-table tbody {
+  overflow-x: auto;
+}
+.wrapper .row .book-table tbody tr td {
+  text-align: center;
+}
+.wrapper .row .book-table tbody tr:nth-child(2n+1) {
+  background: #e6e6e6;
+}
+.wrapper .row #addBook {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1rem;
+}
+.wrapper .row #addBook .form-control {
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  justify-content: center;
+  margin: 0.5rem auto;
+}
+.wrapper .row #addBook .form-control h3 {
+  color: #222f3e;
+}
+.wrapper .row #addBook .form-control label {
+  color: #222f3e;
+  font-weight: 600;
+  flex: 1;
+  text-align: left;
+  text-shadow: 2px 2px 1px rgba(255, 255, 255, 0.25);
+}
+.wrapper .row #addBook .form-control input {
+  background: #c8d6e5;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  flex: 1;
+  font-weight: 700;
+  line-height: 1.64;
+  max-width: 66%;
+  padding: 0.25rem;
+  outline: none;
+  transition: all 250ms linear;
+  -webkit-transition: all 250ms linear;
+}
+.wrapper .row #addBook .form-control input:focus {
+  outline: 3px dashed #ff6b6b;
+}
+.wrapper .row #addBook .form-control button {
+  border: none;
+  border-radius: 10px;
+  flex: 1;
+  margin: 0 1rem;
+  padding: 0.25rem 0.75rem;
+}
+
+@media screen and (min-width: 499px) {
+  .wrapper {
+    margin: 0 auto;
+    max-width: 499px;
+  }
+}
+@media screen and (min-width: 768px) {
+  form,
+#addBook,
+.section-edit-book__form {
+    max-width: 399px !important;
+  }
+
+  .single-book {
+    margin: 0.5rem auto;
+    max-width: 375px;
+  }
+
+  .wrapper {
+    max-width: 768px;
+  }
+}
+@media screen and (min-width: 968px) {
+  .wrapper {
+    max-width: 968px;
+  }
+
+  .row .section-book__book-list {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

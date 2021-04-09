@@ -61,56 +61,62 @@
 <% } %>
 
 <% if (books.length > 0) { %>
-    <table class="mx-auto font-bold">
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>ISBN</th>
-            <th>Thumbnail</th>
-            <th>Edit</th>
-            <th>Remove</th>
-        </tr>
-        <% for(var i = 0; i < books.length; i++) { %>
+    <div class="row">
+        <table class="book-table">
             <tr>
-            <td class=""><%= books[i]._id %></td>
-            <td class=""><%= books[i].title %></td>
-            <td class=""><%= books[i].author %></td>
-            <td class=""><%= books[i].price %></td>
-            <td class=""><%= books[i].ISBN %></td>
-            <td class=""><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
-            <td class=""><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="">Edit</a></td>
-            <td class=""><button id="<%= books[i]._id %>" class="deleteBook ">&times;</button</td>
-    
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>ISBN</th>
+                <th>Thumbnail</th>
+                <th>Edit</th>
+                <th>Remove</th>
             </tr>
-          <% } %>
-    </table>
+            <% for(var i = 0; i < books.length; i++) { %>
+                <tr>
+                <td class=""><%= books[i]._id %></td>
+                <td class=""><%= books[i].title %></td>
+                <td class=""><%= books[i].author %></td>
+                <td class=""><%= books[i].price %></td>
+                <td class=""><%= books[i].ISBN %></td>
+                <td class=""><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
+                <td class=""><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="">Edit</a></td>
+                <td class=""><button id="<%= books[i]._id %>" class="deleteBook ">&times;</button</td>
+        
+                </tr>
+              <% } %>
+        </table>
+    </div>
+    
 
-    <hr class="mx-auto my-5 p-5">
-<h4 class="text-center mx-auto my-4 text-2xl text-black font-bold">Add New Book</h4>
-    <form action="" id="addBook">
-    <div class="form-control">
-        <label class="" for="title">Title: </label>
-        <input type="text" class="" name="title" id="bookTitle" value="" placeholder="Book Title">
+    <hr>
+    <div class="row">
+        <h4>Add New Book</h4>
+        <form action="" id="addBook">
+        <div class="form-control">
+            <label class="" for="title">Title: </label>
+            <input type="text" class="" name="title" id="bookTitle" value="" placeholder="Book Title">
+        </div>
+        <div class="form-control">
+            <label class="" for="author">Author: </label>
+            <input type="text" class="" name="author" id="bookAuthor" value="" placeholder="Book Author">
+        </div>
+        <div class="form-control">
+        <label class="" for="price">Price: </label>
+            <input type="text" class="" name="price" id="bookPrice" value="" placeholder="Book Price">
+        </div>
+        <div class="form-control">
+            <label class="" for="ISBN">ISBN: </label>
+            <input type="text" class="" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
+        </div>
+        <div class="form-control">
+            <button class="" type="submit">Submit</button>
+            <button class="" type="reset">Reset</button>
+        </div>
+    </form>
     </div>
-    <div class="form-control">
-        <label class="" for="author">Author: </label>
-        <input type="text" class="" name="author" id="bookAuthor" value="" placeholder="Book Author">
-    </div>
-    <div class="form-control">
-    <label class="" for="price">Price: </label>
-        <input type="text" class="" name="price" id="bookPrice" value="" placeholder="Book Price">
-    </div>
-    <div class="form-control">
-        <label class="" for="ISBN">ISBN: </label>
-        <input type="text" class="" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
-    </div>
-    <div class="form-control">
-        <button class="" type="submit">Submit</button>
-        <button class="" type="reset">Reset</button>
-    </div>
-</form>
+
 
 <script>
     const form = document.getElementById('addBook');

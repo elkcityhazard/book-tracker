@@ -1,5 +1,52 @@
 const Book = require('../models/Book');
 
+
+const handleErrors = (err) => {
+    console.log(err.name, err.message, err.code, err.errors)
+    let errors = {
+        title: '',
+        author: '',
+        price: '',
+        ISBN: ''
+    }
+
+    // Cast Errors
+    if (err.name === 'ValidationError') {
+        throw new Error(`${err.path} : ${err.value}`)
+    }
+
+    //  title empty
+    if (err.message === 'title is required') {
+        errors.title = 'Please enter a title';
+    }
+
+    //  author empty
+
+    if (err.message === 'author required') {
+        errors.author = 'Please Enter An Author'
+    }
+
+    // Price
+    if (err.message === 'price is required') {
+        errors.price = 'Please enter a price'
+    }
+
+     
+    //  book validation
+    if (err.message.includes('Book validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+             console.log('Val:', val);
+             console.log('Properties:', properties);
+            errors[properties.path] = properties.message;
+            
+        })
+    }
+
+
+    
+console.log('handleErrors: ', errors);
+}
+
 exports.addNewBook_post = async (req, res) => {
     const owner = req.user.id;
     const {author, title, price, ISBN} = req.body;
@@ -93,9 +140,8 @@ exports.updateSingleBook_patch = async (req, res) => {
         })
 
     } catch (err) {
-        res.status(400).json({
-            msg: err.message
-        })
+        const errors = handleErrors(err);
+        return;
     }
 }
 

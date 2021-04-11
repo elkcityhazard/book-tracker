@@ -1,37 +1,35 @@
 const mongoose = require('mongoose');
 const {isNumeric, isLength} = require('validator');
 
-function checkLength (value) {
-    if (value.length === 10) {
-        return true
-    } else if (value.length === 13) {
-        return true
-    } else {
-        return false;
+const checkLength = (value) => {
+    if (!value.length === 10 || !value.length === 13) {
+        console.log('value:', value.length)
+        throw new Error('Length is incorrect')
     }
 }
 
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        required: [true, 'title is required'],
         trim: true,        
     },
     author: {
         type: String,
-        required: true,
+        required: [true, 'author required'],
         trim: true,
         lowercase: true
     },
     price: {
         type: Number,
-        required: true,
+        required: [true, 'price is required']
+
     },
     ISBN: {
         type: String,
-        required: true,
-        minLength: 10,
-        maxLength: 13,
+        required: [true, 'ISBN required'],
+        minLength: [10, 'Must be 10 or 13 characters'],
+        maxLength: [13, 'Must be 10 or 13 characters'],
         validate: [checkLength, 'Length is Incorrect']
     },
     owner: {

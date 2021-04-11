@@ -31,11 +31,13 @@ const handleErrors = (err) => {
 
     //  validation errors
     if (err.message.includes('user validation failed')) {
+        console.log('name: ', err.name)
+        
         console.log(err);
         Object.values(err.errors).forEach(({ property }) => {
             console.log('Val:', val);
             console.log('Properties:', properties);
-            errors[properties.path] = prperties.message;
+            errors[properties.path] = properties.message;
         })
     }
     return errors;

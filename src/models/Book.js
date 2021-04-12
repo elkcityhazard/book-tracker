@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {isNumeric, isLength} = require('validator');
+const {isNumeric, isLength, escape} = require('validator');
 
 const checkLength = (value) => {
     if (!value.length === 10 || !value.length === 13) {
@@ -40,6 +40,16 @@ const bookSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+// bookSchema.pre('save', async function(next) {
+//     const book = this;
+//     this.title = escape(book.title);
+//     this.author = escape(book.author);
+//     this.price = escape(book.price);
+//     this.ISBN = escape(book.ISBN);
+//     next();
+
+// })
 
 const Book = mongoose.model('Book', bookSchema);
 

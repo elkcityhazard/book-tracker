@@ -2,7 +2,6 @@ const Book = require('../models/Book');
 
 
 const handleErrors = (err) => {
-    console.log(err.name, err.message, err.code, err.errors)
     let errors = {
         title: '',
         author: '',
@@ -10,41 +9,70 @@ const handleErrors = (err) => {
         ISBN: ''
     }
 
-    // Cast Errors
-    if (err.name === 'ValidationError') {
-        throw new Error(`${err.path} : ${err.value}`)
-    }
-
-    //  title empty
+    //Cast Errors
+    if ( err.errors['price'].path === 'price' ) {
+        errors.price = 'Price Must Be A Number';
+        return errors;
+            
+    } else {
+ //  title empty
+ if (err.message === 'title is required') {
+    errors.title = 'Please enter a title';
+        
+}
+ //  title empty
     if (err.message === 'title is required') {
         errors.title = 'Please enter a title';
+        
+        
     }
 
     //  author empty
 
     if (err.message === 'author required') {
-        errors.author = 'Please Enter An Author'
+         errors.author = 'Please Enter An Author'
+         
+         
     }
 
     // Price
     if (err.message === 'price is required') {
         errors.price = 'Please enter a price'
+        
+        
     }
-
      
     //  book validation
     if (err.message.includes('Book validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
-             console.log('Val:', val);
-             console.log('Properties:', properties);
-            errors[properties.path] = properties.message;
-            
+         Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;             
         })
+        return errors;
     }
 
+//  author empty
 
+if (err.message === 'author required') {
+     errors.author = 'Please Enter An Author'
+     return errors;
+     
+}
+
+// Price
+if (err.message === 'price is required') {
+    errors.price = 'Please enter a price'
+    return errors;
     
-console.log('handleErrors: ', errors);
+}
+ 
+//  book validation
+if (err.message.includes('Book validation failed')) {
+     Object.values(err.errors).forEach(({ properties }) => {
+        errors[properties.path] = properties.message;             
+    })
+    return errors;
+}
+    }      
 }
 
 exports.addNewBook_post = async (req, res) => {
@@ -141,7 +169,9 @@ exports.updateSingleBook_patch = async (req, res) => {
 
     } catch (err) {
         const errors = handleErrors(err);
-        return;
+        res.status(500).json({
+            errors
+        })
     }
 }
 

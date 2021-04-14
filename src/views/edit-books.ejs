@@ -181,11 +181,11 @@
                 let authorError = document.querySelector('.errors.author');
                 let priceError = document.querySelector('.errors.price');
                 let isbnError = document.querySelector('.errors.isbn');
-                titleError, authorError, priceError, isbnError = '';
                 titleError.textContent = errors.title;
                 authorError.textContent = errors.author;
                 priceError.textContent = errors.price;
-                console.log(isbnError);
+                isbnError.innerText = errors.isbn;
+
                 
             }  
     

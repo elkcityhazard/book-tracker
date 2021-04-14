@@ -26,7 +26,7 @@ const handleErrors = (err) => {
     }
 
     if (err.errors['isbn']) {
-        errors['isbn'] = 'Invalid isbn format - 10 or 13 Characters';
+        errors['isbn'] = 'Invalid isbn format';
     }
 
     return errors;

@@ -14,8 +14,8 @@
         <input type="text" class="" name="price" id="bookPrice" value="" placeholder="Book Price">
     </div>
     <div class="form-control">
-        <label class="" for="ISBN">ISBN: </label>
-        <input type="text" class="" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
+        <label class="" for="isbn">isbn: </label>
+        <input type="text" class="" name="isbn" id="bookisbn" value="" placeholder="Book isbn">
     </div>
     <div class="form-control">
         <button class="" type="submit">Submit</button>
@@ -31,8 +31,8 @@
             const title = form.title.value;
             const author = form.author.value;
             const price = form.price.value;
-            const ISBN = form.ISBN.value;
-            const array = [title, author, price, ISBN];
+            const isbn = form.isbn.value;
+            const array = [title, author, price, isbn];
             array.forEach((prop) => {
                 if (prop.value === '') {
                     return console.log('cannot be empty values');
@@ -42,7 +42,7 @@
                 const res = await fetch('/api/v1/books/', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({title, author, price, ISBN})
+                body: JSON.stringify({title, author, price, isbn})
             })
             const data = await res.json();
             console.log(data);
@@ -68,7 +68,7 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Price</th>
-                <th>ISBN</th>
+                <th>isbn</th>
                 <th>Thumbnail</th>
                 <th>Edit</th>
                 <th>Remove</th>
@@ -79,8 +79,8 @@
                 <td class=""><%= books[i].title %></td>
                 <td class=""><%= books[i].author %></td>
                 <td class=""><%= books[i].price %></td>
-                <td class=""><%= books[i].ISBN %></td>
-                <td class=""><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].ISBN %>-S.jpg" alt="<%= books[i].title %>"></td>
+                <td class=""><%= books[i].isbn %></td>
+                <td class=""><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].isbn %>-S.jpg" alt="<%= books[i].title %>"></td>
                 <td class=""><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="">Edit</a></td>
                 <td class=""><button id="<%= books[i]._id %>" class="deleteBook ">&times;</button</td>
         
@@ -97,18 +97,22 @@
         <div class="form-control">
             <label class="" for="title">Title: </label>
             <input type="text" class="" name="title" id="bookTitle" value="" placeholder="Book Title">
+            <small class="errors title"></small>
         </div>
         <div class="form-control">
             <label class="" for="author">Author: </label>
             <input type="text" class="" name="author" id="bookAuthor" value="" placeholder="Book Author">
+            <small class="errors author"></small>
         </div>
         <div class="form-control">
         <label class="" for="price">Price: </label>
             <input type="text" class="" name="price" id="bookPrice" value="" placeholder="Book Price">
+            <small class="errors price"></small>
         </div>
         <div class="form-control">
-            <label class="" for="ISBN">ISBN: </label>
-            <input type="text" class="" name="ISBN" id="bookISBN" value="" placeholder="Book ISBN">
+            <label class="" for="isbn">isbn: </label>
+            <input type="text" class="" name="isbn" id="bookisbn" value="" placeholder="Book isbn">
+            <small class="errors isbn"></small>
         </div>
         <div class="form-control">
             <button class="" type="submit">Submit</button>
@@ -131,13 +135,10 @@
                 body: JSON.stringify({})
             })
             const data = await res.json();
-            console.log(data);
             if (data.book) {
                 location.assign('/edit-books');
-            } else {
-                console.log(data);
             }
-    
+                
             } catch (err) {
                 return console.log(err);
             }
@@ -155,8 +156,8 @@
             const title = form.title.value;
             const author = form.author.value;
             const price = form.price.value;
-            const ISBN = form.ISBN.value;
-            const array = [title, author, price, ISBN];
+            const isbn = form.isbn.value;
+            const array = [title, author, price, isbn];
             array.forEach((prop) => {
                 if (prop.value === '') {
                     return console.log('cannot be empty values');
@@ -166,15 +167,27 @@
                 const res = await fetch('/api/v1/books/', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({title, author, price, ISBN})
+                body: JSON.stringify({title, author, price, isbn})
             })
             const data = await res.json();
-            console.log(data);
             if (data.book) {
                 location.assign('/edit-books');
-            } else {
-                console.log(data);
             }
+
+            if (data.errors) {
+                console.log(data.errors);
+                const {errors} = data;
+                let titleError = document.querySelector('.errors.title');
+                let authorError = document.querySelector('.errors.author');
+                let priceError = document.querySelector('.errors.price');
+                let isbnError = document.querySelector('.errors.isbn');
+                titleError, authorError, priceError, isbnError = '';
+                titleError.textContent = errors.title;
+                authorError.textContent = errors.author;
+                priceError.textContent = errors.price;
+                console.log(isbnError);
+                
+            }  
     
             } catch (err) {
                 return console.log(err);

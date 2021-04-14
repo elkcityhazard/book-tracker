@@ -13,9 +13,9 @@
             <h1 class="">Title: <%= book.title %></h1>
             <h2 class="">Author: <%= book.author %></h2>
             <p class=""><strong>Price: </strong> <%= book.price %></p>
-            <p class=""><strong>ISBN #: </strong><%= book.ISBN %></p>
+            <p class=""><strong>isbn #: </strong><%= book.isbn %></p>
             <figure>
-                <img class="mx-auto my-4" src="http://covers.openlibrary.org/b/isbn/<%= book.ISBN %>-L.jpg" alt="<%= book.title %>">
+                <img class="mx-auto my-4" src="http://covers.openlibrary.org/b/isbn/<%= book.isbn %>-L.jpg" alt="<%= book.title %>">
                 <figcaption><%= book.title %></figcaption>
             </figure>
         </section>
@@ -32,18 +32,22 @@
                 <div class="form-control">
                     <label class="" for="title">Title: </label>
                     <input type="text" class="" name="title" id="bookTitle" value="<%= book.title %>" placeholder="<%= book.title %>">
+                    <small class="errors title"></small>
                 </div>
                 <div class="form-control">
                     <label class="" for="author">Author: </label>
                     <input type="text" class="" name="author" id="bookAuthor" value="<%= book.author %>" placeholder="<%= book.author %>">
+                    <small class="errors author"></small>
                 </div>
                 <div class="form-control">
                 <label class="" for="price">Price: </label>
                     <input type="text" class="" name="price" id="bookPrice" value="<%= book.price %>" placeholder="<%= book.price %>">
+                    <small class="errors price"></small>
                 </div>
                 <div class="form-control">
-                    <label class="" for="ISBN">ISBN: </label>
-                    <input type="text" class="" name="ISBN" id="bookISBN" value="<%= book.ISBN %>" placeholder="<%= book.ISBN %>">
+                    <label class="" for="isbn">isbn: </label>
+                    <input type="text" class="" name="isbn" id="bookisbn" value="<%= book.isbn %>" placeholder="<%= book.isbn %>">
+                    <small class="errors isbn"></small>
                 </div>
                 <div class="form-control">
                     <button class=" type="submit">Submit</button>
@@ -55,29 +59,51 @@
 
 <script>
     const form = document.getElementById('editBook');
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach((input) => {
+        input.addEventListener('input', (e) => {  
+            if (e.target.value === '') {
+                e.target.nextElementSibling.textContent = 'Please enter a value';
+            }          
+                
+            
+        })
+    })
+
+    
+
 
     form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const title = form.title.value;
             const author = form.author.value;
             const price = form.price.value;
-            const ISBN = form.ISBN.value;
+            const isbn = form.isbn.value;
             try {
                 const res = await fetch('/api/v1/books/<%= book._id %>', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({title, author, price, ISBN})
+                body: JSON.stringify({title, author, price, isbn})
             })
             const data = await res.json();
-            console.log(data);
             if (data.book) {
                 location.assign('/edit-books');
-            } else {
-                // console.log(data);
-            }
-    
+            }  
+            if (data.errors) {
+                const {errors} = data;
+                let titleError = document.querySelector('.errors.title');
+                let authorError = document.querySelector('.errors.author');
+                let priceError = document.querySelector('.errors.price');
+                let isbnError = document.querySelector('.errors.isbn');
+                titleError, authorError, priceError, isbnError = '';
+
+                titleError.textContent = errors.title;
+                authorError.textContent = errors.author;
+                priceError.textContent = errors.price;
+                isbnError.textContent = errors.isbn;
+            }  
             } catch (err) {
-                return console.log(err);
+                console.log(err)
             }
         })
 </script>

@@ -2,69 +2,35 @@ const Book = require('../models/Book');
 
 
 const handleErrors = (err) => {
+    // return console.log(err.errors['title'])
     let errors = {
         title: '',
         author: '',
         price: '',
-        ISBN: ''
+        isbn: ''
     }
 
-    //Cast Errors
-    if ( err.errors['price'].path === 'price' ) {
-        errors.price = 'Price Must Be A Number';
-        return errors;
-            
-    } else {
- //  title empty
- if (err.message === 'title is required') {
-    errors.title = 'Please enter a title';
-        
-}
- //  title empty
-    if (err.message === 'title is required') {
-        errors.title = 'Please enter a title';
-        
+    if (err.errors['title']) {
+        errors['title'] = 'Invalid title format';
+       
+    }
+
+    if (err.errors['author']) {
+        errors['author'] = 'Invalid author format';
         
     }
 
-    //  author empty
-
-    if (err.message === 'author required') {
-         errors.author = 'Please Enter An Author'
-         
-         
-    }
-
-    // Price
-    if (err.message === 'price is required') {
-        errors.price = 'Please enter a price'
-        
+    if (err.errors['price']) {
+        errors['price'] = 'Invalid price format';
         
     }
-     
-    //  book validation
-    if (err.message.includes('Book validation failed')) {
-         Object.values(err.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message;             
-        })
-        return errors;
+
+    if (err.errors['isbn']) {
+        errors['isbn'] = 'Invalid isbn format - 10 or 13 Characters';
     }
 
-//  author empty
-
-if (err.message === 'author required') {
-     errors.author = 'Please Enter An Author'
-     return errors;
-     
-}
-
-// Price
-if (err.message === 'price is required') {
-    errors.price = 'Please enter a price'
     return errors;
-    
-}
- 
+
 //  book validation
 if (err.message.includes('Book validation failed')) {
      Object.values(err.errors).forEach(({ properties }) => {
@@ -73,19 +39,19 @@ if (err.message.includes('Book validation failed')) {
     return errors;
 }
     }      
-}
 
 exports.addNewBook_post = async (req, res) => {
     const owner = req.user.id;
-    const {author, title, price, ISBN} = req.body;
+    const {author, title, price, isbn} = req.body;
     try {
-        const book = await Book.create({author, title, price, ISBN, owner});
+        const book = await Book.create({author, title, price, isbn, owner});
         res.status(200).json({
             book
         })
     } catch (err) {
+        const errors = handleErrors(err);
         return res.status(400).json({
-            msg: err.message
+            errors
         })
     }
 }
@@ -152,7 +118,7 @@ exports.updateSingleBook_patch = async (req, res) => {
     try {
         const id = Object.values(req.params);
         const updates = Object.keys(req.body);
-        const allowedUpdates = ['title', 'author', 'price', 'ISBN'];
+        const allowedUpdates = ['title', 'author', 'price', 'isbn'];
         const isValidOperation = updates.every(update => allowedUpdates.includes(update));
 
         if (!isValidOperation) {

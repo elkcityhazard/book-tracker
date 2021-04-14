@@ -28,16 +28,17 @@ const handleErrors = (err) => {
     if (err.errors['isbn']) {
         errors['isbn'] = 'Invalid isbn format';
     }
-
     return errors;
+
+    
 
 //  book validation
-if (err.message.includes('Book validation failed')) {
-     Object.values(err.errors).forEach(({ properties }) => {
-        errors[properties.path] = properties.message;             
-    })
-    return errors;
-}
+// if (err.message.includes('Book validation failed')) {
+//      Object.values(err.errors).forEach(({ properties }) => {
+//         errors[properties.path] = properties.message;             
+//     })
+//     return errors;
+// }
     }      
 
 exports.addNewBook_post = async (req, res) => {

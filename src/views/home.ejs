@@ -38,10 +38,12 @@
                     <div class="form-control">
                         <label class="" for="email">Email: </label>
                         <input class="" type="text" name="email" id="userEmail">
+                        <small class="errors email"></small>
                     </div>
                     <div class="form-control">
                         <label class="" for="password">Password: </label>
                         <input class="" type="password" name="password" id="userPassword">
+                        <small class="errors password"></small>
                     </div>
                     <div class="form-control">
                         <button class="" type="submit">Submit</button>
@@ -63,11 +65,15 @@
                             body: JSON.stringify({email, password})
                         })
                         const data = await res.json();
-                        console.log(data);
                         if (data.user) {
                             location.assign('/');
                         } else {
-                            console.log(data);
+                            const emailError = document.querySelector('.errors.email');
+                            const passwordError = document.querySelector('.errors.password');
+                            if (data.errors) {
+                                emailError.textContent = data.errors.email;
+                                passwordError.textContent = data.errors.password;
+                            }
                         }
                 
                         } catch (err) {

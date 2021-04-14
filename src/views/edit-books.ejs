@@ -80,7 +80,7 @@
                 <td class=""><%= books[i].author %></td>
                 <td class=""><%= books[i].price %></td>
                 <td class=""><%= books[i].isbn %></td>
-                <td class=""><img src="http://covers.openlibrary.org/b/isbn/<%= books[i].isbn %>-S.jpg" alt="<%= books[i].title %>"></td>
+                <td class=""><img src="https://covers.openlibrary.org/b/isbn/<%= books[i].isbn %>-S.jpg" alt="<%= books[i].title %>"></td>
                 <td class=""><a href="/api/v1/books/<%= books[i]._id %>?edit=true" class="">Edit</a></td>
                 <td class=""><button id="<%= books[i]._id %>" class="deleteBook ">&times;</button</td>
         

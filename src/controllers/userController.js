@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 
 //  Create a JSON Web Token
 const maxAge = 3 * 24 * 60 * 60;
@@ -10,8 +11,16 @@ const createToken = (id) => {
 }
 
 const handleErrors = (err) => {
-    console.log(err.message, err.code);
+    
     let errors = { email: '', password: ''};
+
+    if (err.errors['email'].message === 'Please enter an email') {
+        errors.email = err.errors['email'].message;
+    }
+
+    if (err.errors['password'].message === 'Please enter an email') {
+        errors.email = err.errors['email'].message;
+    }
 
     //  incorrect email
     if (err.message === 'incorrect email') {
@@ -30,11 +39,8 @@ const handleErrors = (err) => {
     }
 
     //  validation errors
-    if (err.message.includes('user validation failed')) {
-        console.log('name: ', err.name)
-        
-        console.log(err);
-        Object.values(err.errors).forEach(({ property }) => {
+    if (err.message.includes('User validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
             console.log('Val:', val);
             console.log('Properties:', properties);
             errors[properties.path] = properties.message;
@@ -44,7 +50,33 @@ const handleErrors = (err) => {
 }
 
 exports.signup_post = async (req, res) => {
-    const { email, password} = req.body;
+    let { email, password} = req.body;
+    let errors = {
+        email: '',
+        password: ''
+    }
+    email = validator.escape(email);
+    password = validator.escape(password);
+
+    if (!email) {
+        errors.email = 'email cannot be empty'
+    }
+    if (!password) {
+        errors.password = 'password cannot be empty'
+    }
+    if (!email || !password) {
+        return res.status(500).json({
+            errors
+        })
+    }
+
+    if (!validator.isEmail(email)) {
+        return res.status(500).json({
+            errors
+        })
+    }
+
+    
     try {
         const user = await User.create({email, password});
         const token = createToken(user._id);
@@ -64,7 +96,23 @@ exports.signup_post = async (req, res) => {
 
 
 exports.login_post = async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    email = validator.escape(email);
+    password = validator.escape(password);
+    if (!validator.isEmail(email)) {
+        return res.status(500).json({
+            errors: {
+                email: 'Invalid email format'
+            }
+        })
+    }
+    if (!password) {
+        return res.status(500).json({
+            errors: {
+                password: 'Please enter a password'
+            }
+        })
+    }
     try {
         const user = await User.login(email, password)
         const token = createToken(user._id);

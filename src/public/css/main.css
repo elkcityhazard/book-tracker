@@ -168,6 +168,7 @@ td {
 .wrapper .row .main-header .signup .form-control {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   font-weight: 700;
   justify-content: center;
   margin: 0.5rem auto;
@@ -203,6 +204,12 @@ td {
   flex: 1;
   margin: 0 1rem;
   padding: 0.25rem 0.75rem;
+}
+.wrapper .row .main-header .signup .form-control small.errors {
+  flex: 0 0 100%;
+  min-height: 1.5rem;
+  padding-right: 1rem;
+  text-align: right;
 }
 .wrapper .row .section-book__book-list {
   align-items: center;
